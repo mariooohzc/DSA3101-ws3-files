@@ -1,0 +1,16 @@
+
+services:
+  fetcher:
+    build: ./backend
+    environment:
+      - DATETIME_STR=2025-08-04T14:00:00
+    volumes:
+      - uvdata:/data
+  web:
+    build: ./frontend
+    ports:
+      - "5000:5000"
+    volumes:
+      - uvdata:/data
+volumes: 
+  uvdata:
