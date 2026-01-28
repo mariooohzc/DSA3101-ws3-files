@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # Our Flask App
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+    environment:
+      - FLASK_ENV=development
+
+  # Our Database
+  redis:
+    image: "redis:alpine"
+    command: ["redis-server", "--appendonly", "yes"] # Enables persistence
+    volumes:
+      - redis_data:/data # Volume to keep data safe
+
+volumes:
+  redis_data:
